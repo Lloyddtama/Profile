@@ -8,71 +8,138 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="translations.js"></script>
 </head>
 
-<body class="p-6 md:p-12">
+<body class="p-6 md:p-12 relative z-10">
 
-    <div class="md:col-span-2 bento-card rounded-3xl p-6">
-    <h3 class="text-xl font-bold mb-3"><i class="fa-solid fa-user-tie mr-2 text-sky-400"></i> Pengalaman</h3>
-    <ul class="text-sm text-gray-400 space-y-2">
-        <li><strong>Graphic Designer</strong> at PT Maju Mundur (2023-2025)</li>
-        <li><strong>Freelance Web Developer</strong> (2022-2023)</li>
-    </ul>
-</div>
+    <!-- Language Selector -->
+    <div class="language-selector fixed top-6 right-6 z-50 flex gap-2">
+        <button class="lang-btn active" data-lang="id" onclick="setLanguage('id')"
+            class="bg-sky-500/20 hover:bg-sky-500/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-sky-500/30">
+            🇮🇩 ID
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')"
+            class="bg-slate-700/20 hover:bg-slate-700/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-slate-700/30">
+            🇬🇧 EN
+        </button>
+    </div>
 
-    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 relative z-10">
 
-        <div class="md:col-span-2 bento-card rounded-3xl p-8 flex flex-col items-center text-center">
-            <img src="https://via.placeholder.com/150" alt="Profile"
-                class="w-24 h-24 rounded-full border-4 border-sky-500 mb-4 shadow-lg shadow-sky-500/20">
-            <h1 class="text-3xl font-bold mb-2">Halo, Saya <span class="gradient-text">Nama Kamu</span></h1>
-            <p class="text-gray-400">Creative Designer & Digital Maker. Suka bikin hal-hal keren di internet.</p>
+        <div onclick="openModal()"
+            class="md:col-span-2 bento-card rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer group">
+            <div class="relative">
+                <div
+                    class="profile-image-wrapper w-24 h-24 border-4 border-sky-500 shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+                    <img src="https://i.ibb.co.com/h1dvpqV0/DSC00941.jpg" alt="Profile" class="profile-image mb-4">
+                </div>
+                <div class="absolute bottom-4 right-0 bg-green-500 w-5 h-5 rounded-full border-4 border-slate-900"
+                    title="Available for work"></div>
+            </div>
+            <h1 class="text-3xl font-bold mb-2"><span class="gradient-text">Farel Dwitama</span></h1>
+            <p id="role" class="text-gray-400">Creative Designer & Digital Maker</p>
+            <span id="subtitle" class="text-xs text-sky-400 mt-4 animate-pulse">hanya anak yang suka berkarya di
+                internet</span>
         </div>
 
-        <a href="#" class="md:col-span-2 bento-card rounded-3xl p-6 flex flex-col justify-between group">
+        <a href="portofolio-detail.html"
+            class="md:col-span-2 bento-card rounded-3xl p-6 flex flex-col justify-between group">
             <div class="flex justify-between items-start">
                 <i class="fa-solid fa-briefcase text-3xl text-sky-400"></i>
                 <i
                     class="fa-solid fa-arrow-up-right-from-square opacity-0 group-hover:opacity-100 transition-opacity"></i>
             </div>
             <div>
-                <h2 class="text-xl font-bold">Portofolio Kami</h2>
-                <p class="text-sm text-gray-400">Lihat semua project yang pernah saya kerjakan.</p>
+                <h2 id="portfolioTitle" class="text-xl font-bold">Portofolio Kami</h2>
+                <p id="portfolioDesc" class="text-sm text-gray-400">Lihat semua project yang pernah saya kerjakan.</p>
             </div>
         </a>
 
-        <a href="#" class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-pink-500">
+        <a href="https://instagram.com/farel_dwitama/" target="_blank"
+            class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-pink-500">
             <i class="fa-brands fa-instagram text-4xl mb-2"></i>
-            <span class="text-xs font-bold">Instagram</span>
+            <span id="instagramLabel" class="text-xs font-bold">Instagram</span>
         </a>
 
-        <a href="#" class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-blue-400">
-            <i class="fa-brands fa-twitter text-4xl mb-2"></i>
-            <span class="text-xs font-bold">Twitter</span>
+        <a href="https://www.tiktok.com/@dtamaaa_?is_from_webapp=1&sender_device=pc" target="_blank"
+            class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-blue-400">
+            <i class="fa-brands fa-tiktok text-4xl mb-2"></i>
+            <span id="tiktokLabel" class="text-xs font-bold">TikTok</span>
         </a>
 
-        <div class="md:col-span-2 bento-card rounded-3xl p-6 overflow-hidden relative group">
+        <a href="https://drive.google.com/drive/folders/1omWP5jXDm7xZ2KTv_b5PKZfT7s8a5sUK?usp=drive_link"
+            target="_blank" class="md:col-span-2 bento-card rounded-3xl p-6 overflow-hidden relative group block">
             <div class="relative z-10">
-                <span class="bg-green-500 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Best Seller</span>
-                <h2 class="text-2xl font-black mt-2">E-Book Desain UI/UX</h2>
-                <p class="text-sm text-gray-400 mb-4">Mulai karir desainmu dari nol!</p>
-                <button
-                    class="bg-white text-black px-4 py-2 rounded-xl text-sm font-bold hover:bg-sky-400 hover:text-white transition-colors">
-                    Beli Sekarang - Rp 50rb
-                </button>
+                <div class="flex justify-between items-start">
+                    <span id="ebookBadge"
+                        class="bg-green-500 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Gratis</span>
+                    <i
+                        class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-white transition-colors"></i>
+                </div>
+
+                <h2 id="ebookTitle" class="text-2xl font-black mt-2 group-hover:text-sky-400 transition-colors">Kumpulan
+                    E-Book</h2>
+                <p id="ebookDesc" class="text-sm text-gray-400 mb-4">Mulailah Membaca!</p>
             </div>
+
             <i
-                class="fa-solid fa-cart-shopping absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12 group-hover:rotate-0 transition-transform"></i>
+                class="fa-solid fa-book-open absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12 group-hover:rotate-0 group-hover:opacity-20 transition-all duration-500"></i>
+        </a>
+
+        <div class="md:col-span-2 bento-card rounded-3xl p-6 flex items-center justify-between">
+            <h3 id="contactTitle" class="text-sm font-bold text-gray-500 uppercase tracking-widest">Contact me</h3>
+            <div class="flex gap-6">
+                <a href="https://wa.me/6285607470496" target="_blank"
+                    class="hover:text-green-500 transition-colors transform hover:scale-110" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp text-5xl"></i>
+                </a>
+                <a href="https://t.me/Lloyddq" target="_blank"
+                    class="hover:text-blue-500 transition-colors transform hover:scale-110" title="Telegram">
+                    <i class="fa-brands fa-telegram text-5xl"></i>
+                </a>
+                <a href="mailto:Farelddwitama@gmail.com"
+                    class="hover:text-red-500 transition-colors transform hover:scale-110" title="Email">
+                    <i class="fa-solid fa-envelope text-5xl"></i>
+                </a>
+            </div>
         </div>
 
-        <a href="#" class="md:col-span-4 bento-card rounded-3xl p-6 flex items-center justify-between group">
+        <div class="md:col-span-2 bento-card rounded-3xl p-6">
+            <h3 id="techTitle" class="text-sm font-bold text-gray-500 uppercase mb-4 tracking-widest">Tech Stack & Tools
+            </h3>
+            <div class="flex flex-wrap gap-4 text-2xl">
+                <i class="fa-brands fa-figma hover:text-purple-500 transition-colors" title="Figma"></i>
+                <i class="fa-brands fa-html5 hover:text-orange-500 transition-colors" title="HTML5"></i>
+                <i class="fa-brands fa-css3-alt hover:text-blue-500 transition-colors" title="CSS3"></i>
+                <i class="fa-brands fa-js hover:text-yellow-400 transition-colors" title="JavaScript"></i>
+                <i class="fa-brands fa-wordpress hover:text-blue-400 transition-colors" title="WordPress"></i>
+            </div>
+        </div>
+
+        <a href="https://namadomainanda.com" target="_blank"
+            class="md:col-span-4 bento-card rounded-3xl p-6 flex items-center justify-between group">
             <div class="flex items-center gap-4">
                 <div class="bg-sky-500/20 p-3 rounded-2xl">
                     <i class="fa-solid fa-globe text-sky-400"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold">Kunjungi Website Utama</h3>
+                    <h3 id="visitWebsiteText" class="font-bold">Kunjungi Website Utama</h3>
                     <p class="text-xs text-gray-500">namadomainanda.com</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right group-hover:translate-x-2 transition-transform"></i>
+        </a>
+
+        <a href="https://t.me/Lfinancial_bot" target="_blank"
+            class="md:col-span-4 bento-card rounded-3xl p-6 flex items-center justify-between group">
+            <div class="flex items-center gap-4">
+                <div class="bg-sky-500/20 p-3 rounded-2xl">
+                    <i class="fa-solid fa-globe text-sky-400"></i>
+                </div>
+                <div>
+                    <h3 id="botTelegramText" class="font-bold">BOT TELEGRAM</h3>
+                    <p class="text-xs text-gray-500">https://t.me/Lfinancial_bot</p>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-right group-hover:translate-x-2 transition-transform"></i>
@@ -81,10 +148,105 @@
     </div>
 
     <footer class="text-center mt-12 text-gray-600 text-xs">
-        &copy; 2026 Crafted with ❤️ by Nama Kamu
+        &copy; 2026 Crafted with ❤️ by FAREL
     </footer>
 
-</body>
+    <div id="profileModal"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+        <div class="bento-card max-w-2xl w-full rounded-[2rem] p-6 md:p-10 relative overflow-y-auto max-h-[90vh]">
 
+            <button onclick="closeModal()"
+                class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center md:text-left">
+                    <img src="https://i.ibb.co.com/h1dvpqV0/DSC00941.jpg"
+                        class="w-32 h-32 rounded-2xl mx-auto md:mx-0 object-cover mb-4 border-2 border-sky-500/30">
+                    <h2 class="text-xl font-bold">Muhammad Farel Fwitama</h2>
+                    <p class="text-sky-400 text-sm mb-4">UI/UX Designer</p>
+
+                    <div class="space-y-3 text-sm text-gray-400">
+                        <div class="flex items-center gap-3 justify-center md:justify-start">
+                            <i class="fa-solid fa-location-dot w-4 text-sky-500"></i>
+                            <span>Jakarta, Indonesia</span>
+                        </div>
+                        <div class="flex items-center gap-3 justify-center md:justify-start">
+                            <i class="fa-solid fa-envelope w-4 text-sky-500"></i>
+                            <span>halo@email.com</span>
+                        </div>
+                        <div class="flex items-center gap-3 justify-center md:justify-start">
+                            <i class="fa-solid fa-calendar-days w-4 text-sky-500"></i>
+                            <span>Tersedia: Full-time / Freelance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-2">
+                    <h3 class="text-lg font-bold mb-3 border-b border-white/10 pb-2">Tentang Saya</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Saya adalah seorang profesional yang berfokus pada solusi kreatif. Memiliki pengalaman lebih
+                        dari 3 tahun dalam industri digital, saya membantu perusahaan membangun identitas visual yang
+                        kuat dan fungsional. Saya sangat menyukai tantangan baru dan selalu haus akan perkembangan
+                        teknologi terkini.
+                    </p>
+
+                    <h3 class="text-lg font-bold mb-3 border-b border-white/10 pb-2">Pendidikan & Sertifikasi</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="bg-sky-500/10 p-2 h-fit rounded-lg text-sky-500 font-bold text-xs">2023</div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Google UX Design Professional Certificate</p>
+                                <p class="text-xs text-gray-500">Coursera Online</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="bg-sky-500/10 p-2 h-fit rounded-lg text-sky-500 font-bold text-xs">2021</div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Sarjana Desain Komunikasi Visual</p>
+                                <p class="text-xs text-gray-500">Universitas Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="#"
+                            class="bg-sky-500 hover:bg-sky-600 text-white px-6 py-2 rounded-full text-sm font-bold transition-all shadow-lg shadow-sky-500/20">
+                            <i class="fa-solid fa-file-arrow-down mr-2"></i>Download CV
+                        </a>
+                        <a href="mailto:emailanda@gmail.com"
+                            class="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-full text-sm font-bold transition-all">
+                            Hubungi Saya
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Agar background tidak bisa di-scroll saat modal buka
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('profileModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Mengembalikan scroll
+        }
+
+        // Menutup modal jika user klik di luar area box
+        window.onclick = function (event) {
+            const modal = document.getElementById('profileModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
 
 </html>
