@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Project - Nama Kamu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="p-6">
+
+    <div class="max-w-4xl mx-auto">
+        <a href="index.html" class="inline-flex items-center text-sky-400 mb-8 hover:gap-2 transition-all">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Bio
+        </a>
+
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">Nama Project Utama</h1>
+            <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-widest text-sky-500">
+                <span class="px-3 py-1 glass rounded-full italic">UI/UX Design</span>
+                <span class="px-3 py-1 glass rounded-full italic">Branding</span>
+                <span class="px-3 py-1 glass rounded-full italic">Mobile App</span>
+            </div>
+        </header>
+
+        <div class="glass rounded-[2.5rem] overflow-hidden mb-12">
+            <img src="https://via.placeholder.com/1200x600" alt="Main Project" class="w-full object-cover">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div class="md:col-span-2 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-500 text-sm">01</span>
+                        Latar Belakang Proyek
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        Di sini kamu ceritakan apa tujuan dari proyek ini. Misalnya: "Klien membutuhkan aplikasi yang
+                        memudahkan pengguna untuk memesan kopi tanpa antri."
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span
+                            class="w-8 h-8 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-500 text-sm">02</span>
+                        Solusi yang Saya Berikan
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        Jelaskan prosesmu. Apakah kamu melakukan riset dulu? Apakah kamu menggambar wireframe? Ini
+                        adalah bagian yang paling dicari HRD karena menunjukkan cara kerjamu.
+                    </p>
+                </section>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-3xl">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Waktu Pengerjaan</h4>
+                    <p class="font-bold">3 Bulan (Jan - Maret 2026)</p>
+                </div>
+                <div class="glass p-6 rounded-3xl">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Teknologi / Tools</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
+                                class="fa-brands fa-figma"></i></span>
+                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
+                                class="fa-brands fa-react"></i></span>
+                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
+                                class="fa-brands fa-adobe"></i></span>
+                    </div>
+                </div>
+                <div class="glass p-6 rounded-3xl">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Link Live Demo</h4>
+                    <a href="#" class="text-sky-400 font-bold hover:underline">Kunjungi Situs <i
+                            class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center py-12 border-t border-white/10">
+            <h3 class="text-2xl font-bold mb-4">Punya project serupa?</h3>
+            <a href="mailto:emailkamu@gmail.com"
+                class="bg-sky-500 hover:bg-sky-600 px-8 py-3 rounded-full font-bold transition-all inline-block">Mulai
+                Kerja Sama</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
