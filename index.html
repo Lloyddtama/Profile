@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Interactive Bio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="p-6 md:p-12">
+
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4">
+
+        <div class="md:col-span-2 bento-card rounded-3xl p-8 flex flex-col items-center text-center">
+            <img src="https://via.placeholder.com/150" alt="Profile"
+                class="w-24 h-24 rounded-full border-4 border-sky-500 mb-4 shadow-lg shadow-sky-500/20">
+            <h1 class="text-3xl font-bold mb-2">Halo, Saya <span class="gradient-text">Nama Kamu</span></h1>
+            <p class="text-gray-400">Creative Designer & Digital Maker. Suka bikin hal-hal keren di internet.</p>
+        </div>
+
+        <a href="#" class="md:col-span-2 bento-card rounded-3xl p-6 flex flex-col justify-between group">
+            <div class="flex justify-between items-start">
+                <i class="fa-solid fa-briefcase text-3xl text-sky-400"></i>
+                <i
+                    class="fa-solid fa-arrow-up-right-from-square opacity-0 group-hover:opacity-100 transition-opacity"></i>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold">Portofolio Kami</h2>
+                <p class="text-sm text-gray-400">Lihat semua project yang pernah saya kerjakan.</p>
+            </div>
+        </a>
+
+        <a href="#" class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-pink-500">
+            <i class="fa-brands fa-instagram text-4xl mb-2"></i>
+            <span class="text-xs font-bold">Instagram</span>
+        </a>
+
+        <a href="#" class="bento-card rounded-3xl p-6 flex flex-col items-center justify-center hover:text-blue-400">
+            <i class="fa-brands fa-twitter text-4xl mb-2"></i>
+            <span class="text-xs font-bold">Twitter</span>
+        </a>
+
+        <div class="md:col-span-2 bento-card rounded-3xl p-6 overflow-hidden relative group">
+            <div class="relative z-10">
+                <span class="bg-green-500 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Best Seller</span>
+                <h2 class="text-2xl font-black mt-2">E-Book Desain UI/UX</h2>
+                <p class="text-sm text-gray-400 mb-4">Mulai karir desainmu dari nol!</p>
+                <button
+                    class="bg-white text-black px-4 py-2 rounded-xl text-sm font-bold hover:bg-sky-400 hover:text-white transition-colors">
+                    Beli Sekarang - Rp 50rb
+                </button>
+            </div>
+            <i
+                class="fa-solid fa-cart-shopping absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12 group-hover:rotate-0 transition-transform"></i>
+        </div>
+
+        <a href="#" class="md:col-span-4 bento-card rounded-3xl p-6 flex items-center justify-between group">
+            <div class="flex items-center gap-4">
+                <div class="bg-sky-500/20 p-3 rounded-2xl">
+                    <i class="fa-solid fa-globe text-sky-400"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold">Kunjungi Website Utama</h3>
+                    <p class="text-xs text-gray-500">namadomainanda.com</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right group-hover:translate-x-2 transition-transform"></i>
+        </a>
+
+    </div>
+
+    <footer class="text-center mt-12 text-gray-600 text-xs">
+        &copy; 2026 Crafted with ❤️ by Nama Kamu
+    </footer>
+
+</body>
+
+</html>
