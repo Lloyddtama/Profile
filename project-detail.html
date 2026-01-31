@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Project - Farel dwitama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="translations.js"></script>
+    <style>
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(71, 85, 105, 0.2);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(71, 85, 105, 0.4);
+            border-color: rgba(71, 85, 105, 0.5);
+        }
+
+        .lang-btn.active {
+            background: rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.6);
+            color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 25%, #1e1b4b 50%, #16213e 75%, #0f172a 100%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: inline-block;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .tech-icon:hover {
+            background: rgba(56, 189, 248, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+        }
+
+        .secondary-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+    </style>
+</head>
+
+<body class="p-4 md:p-6">
+
+    <div class="language-selector fixed top-6 right-6 z-50 flex gap-2">
+        <button class="lang-btn active" data-lang="id" onclick="setLanguage('id')"
+            class="bg-sky-500/20 hover:bg-sky-500/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-sky-500/30">
+            ID
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')"
+            class="bg-slate-700/20 hover:bg-slate-700/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-slate-700/30">
+            EN
+        </button>
+    </div>
+
+    <div class="content-wrapper max-w-5xl mx-auto">
+
+        <!-- Back Button -->
+        <a id="projectBack" href="portofolio-detail.html"
+            class="inline-flex items-center text-sky-400 mb-8 hover:gap-2 transition-all">
+            <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Portfolio
+        </a>
+
+        <!-- Main Header -->
+        <header class="mb-12">
+            <div class="mb-4 flex flex-wrap gap-2" id="categoryBadges"></div>
+            <h1 class="text-5xl md:text-6xl font-black mb-6 uppercase tracking-tighter" id="projectTitle">Loading...
+            </h1>
+            <p class="text-gray-400 text-lg max-w-3xl leading-relaxed" id="projectOverview"></p>
+        </header>
+
+        <!-- Hero Image -->
+        <div class="glass rounded-3xl overflow-hidden mb-16 gallery-image" id="heroImage" style="height: 400px;">
+            <img src="" alt="Project Hero" id="heroImg">
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+
+            <!-- Left Column: Detailed Sections -->
+            <div class="lg:col-span-2 space-y-10">
+
+                <!-- Background Section -->
+                <section>
+                    <div class="flex gap-4 items-start mb-5">
+                        <div class="section-number">01</div>
+                        <h2 id="projectSection1" class="text-2xl md:text-3xl font-bold">Latar Belakang Proyek</h2>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-lg" id="projectBackground"></p>
+                </section>
+
+                <!-- Solution Section -->
+                <section>
+                    <div class="flex gap-4 items-start mb-5">
+                        <div class="section-number">02</div>
+                        <h2 id="projectSection2" class="text-2xl md:text-3xl font-bold">Solusi yang Saya Berikan</h2>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-lg" id="projectSolution"></p>
+                </section>
+
+                <!-- Results Section -->
+                <section>
+                    <div class="flex gap-4 items-start mb-5">
+                        <div class="section-number">03</div>
+                        <h2 id="projectSection3" class="text-2xl md:text-3xl font-bold">Hasil & Impact</h2>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-lg" id="projectResult"></p>
+                </section>
+
+                <!-- Gallery Section -->
+                <section>
+                    <div class="flex gap-4 items-start mb-5">
+                        <div class="section-number">04</div>
+                        <h2 id="projectSection4" class="text-2xl md:text-3xl font-bold">Gallery</h2>
+                    </div>
+                    <div id="galleryContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </section>
+
+            </div>
+
+            <!-- Right Column: Info Cards -->
+            <div class="space-y-6">
+
+                <!-- Timeline Card -->
+                <div class="info-card">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-widest">⏱️ Waktu Pengerjaan</h4>
+                    <p class="text-xl font-bold" id="projectDuration"></p>
+                </div>
+
+                <!-- Role Card -->
+                <div class="info-card">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-widest">👤 Role/Tanggung Jawab
+                    </h4>
+                    <p class="text-lg font-semibold" id="projectRole"></p>
+                </div>
+
+                <!-- Technologies Card -->
+                <div class="info-card">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-widest">🛠️ Teknologi & Tools
+                    </h4>
+                    <div class="grid grid-cols-3 gap-3" id="techStack"></div>
+                </div>
+
+                <!-- Links Card -->
+                <div class="info-card">
+                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4 tracking-widest">🔗 Link & Demo</h4>
+                    <div class="space-y-3" id="projectLinks"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Related Projects -->
+        <section class="mb-16 border-t border-white/10 pt-16">
+            <h2 id="relatedProjectsTitle" class="text-3xl font-bold mb-8">Proyek Lainnya</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="relatedProjects"></div>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="text-center py-16 border-t border-white/10">
+            <h3 id="ctaTitle" class="text-3xl md:text-4xl font-bold mb-4">Tertarik dengan Kolaborasi?</h3>
+            <p id="ctaDesc" class="text-gray-400 mb-8 text-lg">Hubungi saya sekarang untuk membahas project Anda
+                berikutnya.</p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="mailto:emailkamu@gmail.com" class="cta-button"><i class="fa-solid fa-envelope mr-2"></i> <span
+                        id="ctaButton">Hubungi Saya</span></a>
+                <a href="portofolio-detail.html" class="secondary-button"><i class="fa-solid fa-arrow-left mr-2"></i>
+                    Kembali ke Portfolio</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Database Project
+        const projects = {
+            1: {
+                title: "Vasa Banyuwangi",
+                overview: "Platform marketplace yang dirancang untuk mendukung UMKM lokal Banyuwangi dalam menjual produk mereka secara online dengan mudah dan efisien.",
+                categories: ["UI/UX Design", "Marketplace", "Website"],
+                heroImage: "https://i.ibb.co.com/wr2YzDL1/image.png",
+                background: "Klien adalah sebuah organisasi UMKM Banyuwangi yang membutuhkan solusi e-commerce untuk menjangkau pasar yang lebih luas. Mereka memiliki banyak produk lokal berkualitas tetapi kesulitan dalam proses penjualan online. Tujuan proyek ini adalah membuat platform marketplace yang user-friendly, aman, dan dapat meningkatkan penjualan mereka hingga 300%.",
+                solution: "Saya melakukan riset pasar mendalam dan user interview dengan 20+ calon pengguna untuk memahami kebutuhan mereka. Setelah itu, saya membuat wireframe dan prototype interaktif menggunakan Figma. Dalam implementasi, saya fokus pada kemudahan navigasi, proses checkout yang simpel, dan integrasi payment gateway yang aman. Saya juga mengoptimalkan performa website agar loading cepat di koneksi internet yang lambat.",
+                result: "Marketplace berhasil diluncurkan dan mendapat respon positif dari komunitas UMKM. Dalam 3 bulan pertama, platform mencatat 500+ seller terdaftar dan 5000+ transaksi berhasil. User retention rate mencapai 75% dengan rating kepuasan 4.8/5 di app store.",
+                duration: "2 Bulan (November - Desember 2025)",
+                role: "UI/UX Designer & Frontend Developer",
+                technologies: [
+                    { name: "Figma", icon: "🎨" },
+                    { name: "React", icon: "⚛️" },
+                    { name: "Tailwind", icon: "🎯" },
+                    { name: "Firebase", icon: "🔥" },
+                    { name: "Stripe", icon: "💳" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/600x300?text=Dashboard",
+                    "https://via.placeholder.com/600x300?text=Product+Page",
+                    "https://via.placeholder.com/600x300?text=Checkout",
+                    "https://via.placeholder.com/600x300?text=Mobile+View"
+                ],
+                links: [
+                    { text: "Kunjungi Situs", url: "https://vasa-banyuwangi.web.app/", icon: "fa-globe" },
+                    { text: "Figma Design", url: "https://figma.com", icon: "fa-figma" }
+                ]
+            },
+            2: {
+                title: "Coffee Shop App",
+                overview: "Aplikasi mobile untuk pemesanan kopi dengan antarmuka modern, fitur real-time tracking, dan loyalty program terintegrasi.",
+                categories: ["UI/UX Design", "Mobile App"],
+                heroImage: "https://via.placeholder.com/800x400?text=Coffee+Shop+App",
+                background: "Coffee shop lokal membutuhkan solusi untuk mengurangi antrian panjang di toko mereka. Mereka ingin customers bisa memesan kopi dari rumah atau kantor dan mengambilnya tanpa perlu menunggu lama.",
+                solution: "Saya merancang mobile app dengan flow yang intuitif: browse menu → customize drink → checkout → track real-time status pemesanan. Design menggunakan warm colors dan typography yang modern. Implementasi menggunakan React Native untuk multi-platform compatibility.",
+                result: "App diunduh 10,000+ kali dalam bulan pertama. Traffic toko meningkat 40% dengan customer baru yang menemukan melalui app. Average order value naik 25% karena mudahnya proses ordering.",
+                duration: "6 Minggu (Januari - Februari 2025)",
+                role: "Product Designer & Mobile Developer",
+                technologies: [
+                    { name: "Figma", icon: "🎨" },
+                    { name: "React Native", icon: "⚛️" },
+                    { name: "Node.js", icon: "🟢" },
+                    { name: "Firebase", icon: "🔥" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/300x600?text=Home+Screen",
+                    "https://via.placeholder.com/300x600?text=Menu+Screen",
+                    "https://via.placeholder.com/300x600?text=Order+Tracking"
+                ],
+                links: [
+                    { text: "App Store", url: "#", icon: "fa-apple" },
+                    { text: "Google Play", url: "#", icon: "fa-google-play" }
+                ]
+            },
+            3: {
+                title: "E-Learning Platform",
+                overview: "Platform pembelajaran online dengan dashboard interaktif, progress tracking, dan sistem notifikasi real-time untuk pendidik dan siswa.",
+                categories: ["Website", "Web App"],
+                heroImage: "https://via.placeholder.com/800x400?text=E-Learning",
+                background: "Institusi pendidikan membutuhkan platform untuk hybrid learning (online + offline). Mereka ingin teachers dapat upload materi, students bisa submit assignment, dan track progress real-time.",
+                solution: "Saya built comprehensive learning platform dengan fitur: video streaming, interactive quizzes, assignment submission, progress dashboard, dan communication tools. Design fokus pada aksesibilitas untuk berbagai tingkat kemampuan teknis.",
+                result: "Platform digunakan oleh 2000+ students dan 150+ teachers. Student engagement meningkat 60%. Platform successfully handled 5000+ concurrent users tanpa downtime.",
+                duration: "3 Bulan (Desember 2024 - Februari 2025)",
+                role: "Full Stack Developer & UX Designer",
+                technologies: [
+                    { name: "React", icon: "⚛️" },
+                    { name: "Node.js", icon: "🟢" },
+                    { name: "MongoDB", icon: "🍃" },
+                    { name: "FFmpeg", icon: "🎬" },
+                    { name: "AWS", icon: "☁️" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/600x300?text=Dashboard",
+                    "https://via.placeholder.com/600x300?text=Course+Page",
+                    "https://via.placeholder.com/600x300?text=Assignment+Submission"
+                ],
+                links: [
+                    { text: "Platform Demo", url: "#", icon: "fa-globe" },
+                    { text: "Documentation", url: "#", icon: "fa-book" }
+                ]
+            },
+            4: {
+                title: "Fashion E-Commerce",
+                overview: "Toko online fashion dengan katalog lengkap, sistem filter pencarian advanced, dan integrasi payment yang aman.",
+                categories: ["Marketplace", "E-Commerce"],
+                heroImage: "https://via.placeholder.com/800x400?text=Fashion+Store",
+                background: "Fashion brand ingin ekspansi online untuk reach customer di berbagai kota. Mereka butuh e-commerce yang bisa handle inventory management, order processing, dan customer engagement.",
+                solution: "Saya developed full e-commerce solution dengan inventory management system, advanced search filters (size, color, price range), wishlist feature, dan multi-payment gateway. Optimization untuk mobile shopping experience.",
+                result: "Monthly revenue 2x lipat dari traffic online. Customer lifetime value meningkat 150%. Return rate turun ke 5% karena detailed product images dan accurate sizing guide.",
+                duration: "2.5 Bulan (Oktober - Desember 2024)",
+                role: "E-Commerce Developer & Product Manager",
+                technologies: [
+                    { name: "React", icon: "⚛️" },
+                    { name: "Next.js", icon: "⚡" },
+                    { name: "PostgreSQL", icon: "🗄️" },
+                    { name: "Stripe", icon: "💳" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/600x300?text=Product+Listing",
+                    "https://via.placeholder.com/600x300?text=Product+Detail",
+                    "https://via.placeholder.com/600x300?text=Checkout+Page"
+                ],
+                links: [
+                    { text: "Kunjungi Toko", url: "#", icon: "fa-shopping-bag" }
+                ]
+            },
+            5: {
+                title: "Corporate Website",
+                overview: "Website perusahaan profesional dengan portfolio showcase, blog section, dan form kontak terintegrasi dengan CMS.",
+                categories: ["Website", "Corporate"],
+                heroImage: "https://via.placeholder.com/800x400?text=Corporate+Website",
+                background: "Perusahaan consulting membutuhkan website untuk meningkatkan brand awareness dan lead generation. Website harus showcase portfolio projects dan serve as landing page untuk inbound marketing.",
+                solution: "Saya design corporate website dengan professional aesthetic, clear information hierarchy, dan CTAs yang strategis. Integrated CMS untuk client bisa update blog posts dan portfolio entries independently.",
+                result: "Website menjadi top marketing channel. Monthly leads from website meningkat 200%. Bounce rate turun 40% dan average session duration 5+ minutes.",
+                duration: "4 Minggu (Januari 2025)",
+                role: "Web Designer & Frontend Developer",
+                technologies: [
+                    { name: "Figma", icon: "🎨" },
+                    { name: "Vue.js", icon: "🖖" },
+                    { name: "Strapi", icon: "📝" },
+                    { name: "Vercel", icon: "⚫" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/600x300?text=Hero+Section",
+                    "https://via.placeholder.com/600x300?text=Portfolio+Section",
+                    "https://via.placeholder.com/600x300?text=Contact+Section"
+                ],
+                links: [
+                    { text: "Kunjungi Website", url: "#", icon: "fa-globe" },
+                    { text: "CMS Admin", url: "#", icon: "fa-lock" }
+                ]
+            },
+            6: {
+                title: "SaaS Dashboard",
+                overview: "Dashboard analytics SaaS dengan visualisasi data komprehensif, real-time reporting, dan customizable widgets.",
+                categories: ["UI/UX", "SaaS"],
+                heroImage: "https://via.placeholder.com/800x400?text=SaaS+Dashboard",
+                background: "Startup SaaS membutuhkan dashboard yang memungkinkan users untuk monitor business metrics real-time dengan intuitive visualization.",
+                solution: "Saya design dan develop sophisticated dashboard dengan D3.js untuk custom charts, drag-drop widget customization, dan real-time data updates via WebSocket. Dark theme optimized untuk long viewing sessions.",
+                result: "User retention 85% dengan average session duration 30+ minutes. Premium tier adoption 40% karena advanced analytics features valued by users.",
+                duration: "2 Bulan (November - Desember 2024)",
+                role: "Full Stack Developer & Data Visualization Specialist",
+                technologies: [
+                    { name: "React", icon: "⚛️" },
+                    { name: "D3.js", icon: "📊" },
+                    { name: "Node.js", icon: "🟢" },
+                    { name: "PostgreSQL", icon: "🗄️" },
+                    { name: "WebSocket", icon: "🔌" }
+                ],
+                gallery: [
+                    "https://via.placeholder.com/600x300?text=Main+Dashboard",
+                    "https://via.placeholder.com/600x300?text=Analytics+Page",
+                    "https://via.placeholder.com/600x300?text=Reports+View"
+                ],
+                links: [
+                    { text: "Live Demo", url: "#", icon: "fa-globe" }
+                ]
+            }
+        };
+
+        // Load Project Based on URL Parameter
+        function loadProject() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('id');
+
+            if (!projectId || !projects[projectId]) {
+                document.body.innerHTML = '<div style="text-align:center; padding: 50px;"><h1>Project tidak ditemukan</h1><a href="portofolio-detail.html">Kembali ke Portfolio</a></div>';
+                return;
+            }
+
+            const project = projects[projectId];
+
+            // Set Title & Meta
+            document.title = project.title + " - Farel dwitama";
+
+            // Populate Header
+            document.getElementById('projectTitle').textContent = project.title;
+            document.getElementById('projectOverview').textContent = project.overview;
+
+            // Populate Categories
+            const categoryBadges = document.getElementById('categoryBadges');
+            project.categories.forEach(cat => {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                badge.textContent = cat;
+                categoryBadges.appendChild(badge);
+            });
+
+            // Set Hero Image
+            document.getElementById('heroImg').src = project.heroImage;
+
+            // Populate Sections
+            document.getElementById('projectBackground').textContent = project.background;
+            document.getElementById('projectSolution').textContent = project.solution;
+            document.getElementById('projectResult').textContent = project.result;
+
+            // Populate Info Cards
+            document.getElementById('projectDuration').textContent = project.duration;
+            document.getElementById('projectRole').textContent = project.role;
+
+            // Tech Stack
+            const techStack = document.getElementById('techStack');
+            project.technologies.forEach(tech => {
+                const techDiv = document.createElement('div');
+                techDiv.className = 'tech-icon';
+                techDiv.title = tech.name;
+                techDiv.textContent = tech.icon;
+                techStack.appendChild(techDiv);
+            });
+
+            // Links
+            const linksContainer = document.getElementById('projectLinks');
+            project.links.forEach(link => {
+                const linkDiv = document.createElement('a');
+                linkDiv.href = link.url;
+                linkDiv.className = 'flex items-center gap-2 text-sky-400 hover:text-sky-300 transition-all';
+                linkDiv.target = '_blank';
+                linkDiv.innerHTML = `<i class="fa-solid ${link.icon}"></i> <span>${link.text}</span>`;
+                linksContainer.appendChild(linkDiv);
+            });
+
+            // Gallery
+            const galleryContainer = document.getElementById('galleryContainer');
+            project.gallery.forEach((img, index) => {
+                const galleryDiv = document.createElement('div');
+                galleryDiv.className = 'gallery-image';
+                galleryDiv.innerHTML = `<img src="${img}" alt="Gallery ${index + 1}">`;
+                galleryContainer.appendChild(galleryDiv);
+            });
+
+            // Related Projects
+            const relatedContainer = document.getElementById('relatedProjects');
+            const relatedIds = Object.keys(projects).filter(id => id != projectId).slice(0, 3);
+
+            relatedIds.forEach(id => {
+                const relProject = projects[id];
+                const card = document.createElement('a');
+                card.href = `project-detail.html?id=${id}`;
+                card.className = 'glass p-6 rounded-2xl hover:scale-105 transition-transform cursor-pointer';
+                card.innerHTML = `
+                    <h4 class="text-lg font-bold mb-2">${relProject.title}</h4>
+                    <p class="text-gray-400 text-sm">${relProject.overview.substring(0, 60)}...</p>
+                    <div class="mt-4">
+                        <span class="text-sky-400 font-bold text-sm">Lihat Detail →</span>
+                    </div>
+                `;
+                relatedContainer.appendChild(card);
+            });
+        }
+
+        // Load on page ready
+        loadProject();
+    </script>
+
+</body>
+
+</html>
