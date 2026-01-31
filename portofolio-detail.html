@@ -4,14 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Project - Nama Kamu</title>
+    <title>Portfolio - Farel dwitama</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="translations.js"></script>
     <style>
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(71, 85, 105, 0.2);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(71, 85, 105, 0.4);
+            border-color: rgba(71, 85, 105, 0.5);
+        }
+
+        .lang-btn.active {
+            background: rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.6);
+            color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
         body {
-            background-color: #0f172a;
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 25%, #1e1b4b 50%, #16213e 75%, #0f172a 100%);
+            background-attachment: fixed;
             color: white;
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -30%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(129, 140, 248, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .glass {
@@ -19,87 +80,262 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
+        }
+
+        .project-card .thumbnail {
+            height: 240px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .thumbnail img {
+            transform: scale(1.08);
+        }
+
+        .badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.6);
+            color: #38bdf8;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 
 <body class="p-6">
 
-    <div class="max-w-4xl mx-auto">
+    <div class="language-selector fixed top-6 right-6 z-50 flex gap-2">
+        <button class="lang-btn active" data-lang="id" onclick="setLanguage('id')"
+            class="bg-sky-500/20 hover:bg-sky-500/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-sky-500/30">
+            ID
+        </button>
+        <button class="lang-btn" data-lang="en" onclick="setLanguage('en')"
+            class="bg-slate-700/20 hover:bg-slate-700/40 px-3 py-1 rounded-lg text-sm font-semibold transition-all border border-slate-700/30">
+            EN
+        </button>
+    </div>
+
+
+    <div class="content-wrapper max-w-6xl mx-auto">
         <a href="index.html" class="inline-flex items-center text-sky-400 mb-8 hover:gap-2 transition-all">
             <i class="fa-solid fa-arrow-left mr-2"></i> Kembali ke Bio
         </a>
 
+        <!-- Header -->
         <header class="mb-12">
-            <h1 class="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">Nama Project Utama</h1>
-            <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-widest text-sky-500">
-                <span class="px-3 py-1 glass rounded-full italic">UI/UX Design</span>
-                <span class="px-3 py-1 glass rounded-full italic">Branding</span>
-                <span class="px-3 py-1 glass rounded-full italic">Mobile App</span>
-            </div>
+            <h1 id="portfolioHeaderTitle" class="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">
+                Portfolio</h1>
+            <p id="portfolioHeaderDesc" class="text-gray-400 text-lg max-w-2xl">Koleksi proyek yang telah saya kerjakan
+                untuk berbagai klien dan
+                industri. Setiap proyek mencerminkan dedikasi saya terhadap desain yang fungsional dan pengalaman
+                pengguna yang optimal.</p>
         </header>
 
-        <div class="glass rounded-[2.5rem] overflow-hidden mb-12">
-            <img src="https://via.placeholder.com/1200x600" alt="Main Project" class="w-full object-cover">
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap gap-3 mb-12">
+            <button id="filterAll" class="filter-btn active" data-filter="all">Semua Proyek</button>
+            <button id="filterUIUX" class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+            <button id="filterWeb" class="filter-btn" data-filter="web">Website</button>
+            <button id="filterMarketplace" class="filter-btn" data-filter="marketplace">Marketplace</button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            <div class="md:col-span-2 space-y-8">
-                <section>
-                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <span
-                            class="w-8 h-8 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-500 text-sm">01</span>
-                        Latar Belakang Proyek
-                    </h2>
-                    <p class="text-gray-400 leading-relaxed text-lg">
-                        Di sini kamu ceritakan apa tujuan dari proyek ini. Misalnya: "Klien membutuhkan aplikasi yang
-                        memudahkan pengguna untuk memesan kopi tanpa antri."
-                    </p>
-                </section>
+        <!-- Portfolio Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
 
-                <section>
-                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <span
-                            class="w-8 h-8 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-500 text-sm">02</span>
-                        Solusi yang Saya Berikan
-                    </h2>
-                    <p class="text-gray-400 leading-relaxed text-lg">
-                        Jelaskan prosesmu. Apakah kamu melakukan riset dulu? Apakah kamu menggambar wireframe? Ini
-                        adalah bagian yang paling dicari HRD karena menunjukkan cara kerjamu.
-                    </p>
-                </section>
-            </div>
-
-            <div class="space-y-6">
-                <div class="glass p-6 rounded-3xl">
-                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Waktu Pengerjaan</h4>
-                    <p class="font-bold">3 Bulan (Jan - Maret 2026)</p>
+            <!-- Project 1: Vasa Banyuwangi -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="marketplace">
+                <div class="thumbnail">
+                    <img src="https://i.ibb.co.com/wr2YzDL1/image.png" alt="Vasa Banyuwangi">
                 </div>
-                <div class="glass p-6 rounded-3xl">
-                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Teknologi / Tools</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
-                                class="fa-brands fa-figma"></i></span>
-                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
-                                class="fa-brands fa-react"></i></span>
-                        <span class="text-xl hover:text-sky-400 cursor-pointer"><i
-                                class="fa-brands fa-adobe"></i></span>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Vasa Banyuwangi</h3>
+                    <p class="text-gray-400 text-sm mb-4">Platform marketplace untuk produk lokal Banyuwangi dengan
+                        fitur transaksi mudah dan interface intuitif.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">UI/UX</span>
+                        <span class="badge">Marketplace</span>
                     </div>
-                </div>
-                <div class="glass p-6 rounded-3xl">
-                    <h4 class="text-gray-500 text-xs font-bold uppercase mb-4">Link Live Demo</h4>
-                    <a href="#" class="text-sky-400 font-bold hover:underline">Kunjungi Situs <i
-                            class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+                    <a href="project-detail.html?id=1" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
                 </div>
             </div>
+
+            <!-- Project 2: Coffee Shop App -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="ui-ux">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #8B5A3C, #D2691E);">
+                    <div class="w-full h-full flex items-center justify-center text-6xl">☕</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Coffee Shop App</h3>
+                    <p class="text-gray-400 text-sm mb-4">Aplikasi pemesanan kopi dengan UI yang modern dan pengalaman
+                        pengguna yang seamless untuk order tanpa antri.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">UI/UX</span>
+                        <span class="badge">Mobile App</span>
+                    </div>
+                    <a href="project-detail.html?id=2" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 3: E-Learning Platform -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="web">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <div class="w-full h-full flex items-center justify-center text-6xl">📚</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">E-Learning Platform</h3>
+                    <p class="text-gray-400 text-sm mb-4">Platform pembelajaran online dengan dashboard interaktif,
+                        progress tracking, dan sistem notifikasi real-time untuk pengguna.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Website</span>
+                        <span class="badge">Web App</span>
+                    </div>
+                    <a href="project-detail.html?id=3" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 4: Fashion E-Commerce -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="marketplace">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <div class="w-full h-full flex items-center justify-center text-6xl">👗</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Fashion E-Commerce</h3>
+                    <p class="text-gray-400 text-sm mb-4">Toko online fashion dengan katalog produk lengkap, filter
+                        pencarian advanced, dan sistem pembayaran yang aman.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Marketplace</span>
+                        <span class="badge">E-Commerce</span>
+                    </div>
+                    <a href="project-detail.html?id=4" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 5: Corporate Website -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="web">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <div class="w-full h-full flex items-center justify-center text-6xl">🏢</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Corporate Website</h3>
+                    <p class="text-gray-400 text-sm mb-4">Website perusahaan profesional dengan portfolio showcase, blog
+                        section, dan form kontak yang terintegrasi dengan CMS.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">Website</span>
+                        <span class="badge">Corporate</span>
+                    </div>
+                    <a href="project-detail.html?id=5" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+            </div>
+
+            <!-- Project 6: SaaS Dashboard -->
+            <div class="project-card rounded-2xl overflow-hidden" data-category="ui-ux">
+                <div class="thumbnail" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    <div class="w-full h-full flex items-center justify-center text-6xl">📊</div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">SaaS Dashboard</h3>
+                    <p class="text-gray-400 text-sm mb-4">Dashboard analytics SaaS dengan visualisasi data yang
+                        komprehensif, real-time reporting, dan customizable widgets.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="badge">UI/UX</span>
+                        <span class="badge">SaaS</span>
+                    </div>
+                    <a href="project-detail.html?id=6" class="text-sky-400 font-bold text-sm hover:underline"><span
+                            class="view-detail">Lihat Detail</span> <i class="fa-solid fa-arrow-right text-xs"></i></a>
+                </div>
+            </div>
+
         </div>
 
-        <div class="text-center py-12 border-t border-white/10">
-            <h3 class="text-2xl font-bold mb-4">Punya project serupa?</h3>
+        <!-- CTA Section -->
+        <div class="text-center py-16 border-t border-white/10">
+            <h3 class="text-3xl font-bold mb-4">Tertarik untuk kolaborasi?</h3>
+            <p class="text-gray-400 mb-8">Mari kita ciptakan sesuatu yang luar biasa bersama-sama.</p>
             <a href="mailto:emailkamu@gmail.com"
-                class="bg-sky-500 hover:bg-sky-600 px-8 py-3 rounded-full font-bold transition-all inline-block">Mulai
-                Kerja Sama</a>
+                class="bg-sky-500 hover:bg-sky-600 px-10 py-3 rounded-full font-bold transition-all inline-block">
+                Hubungi Saya
+            </a>
         </div>
     </div>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.dataset.filter;
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.dataset.category === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                        }, 10);
+                    } else {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
